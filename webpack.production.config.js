@@ -1,6 +1,4 @@
-var webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
-
+var webpack = require('webpack');
 module.exports = {
   entry: './src/app.jsx',
   output: {
@@ -19,12 +17,5 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'node_modules/html-webpack-template/index.html',
-      appMountId: 'app',
-      title: 'App'
-    })
-  ]
+  }
 };

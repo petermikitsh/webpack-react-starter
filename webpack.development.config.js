@@ -1,5 +1,4 @@
-var webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
   // debug es6 in the browser
@@ -29,11 +28,6 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // HMR
-    new webpack.NoErrorsPlugin(), // HMR
-    new HtmlWebpackPlugin({
-      template: 'node_modules/html-webpack-template/index.html',
-      appMountId: 'app',
-      title: 'App'
-    })
+    new webpack.NoErrorsPlugin() // HMR
   ]
 };

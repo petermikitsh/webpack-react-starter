@@ -1,39 +1,22 @@
 var config = require('./server/config/config'),
+    compression = require('compression'),
     express = require('express'),
     fs = require('fs'),
     https = require('https'),
     path = require('path'),
-    request = require('request'),
+    ssr = require('./server/ssr'),
     webpack = require('webpack'),
     WebpackDevServer = require('webpack-dev-server'),
     WebpackDevConfig = require('./webpack.development.config');
 
 var app = express();
+app.use(compression());
 
 app.get('/bundle.js', function (req, res) {
-  if (config.useBuildAssets) {
-    res.sendFile(path.resolve(__dirname + '/.build/bundle.js'));
-  } else {
-    res.redirect(WebpackDevConfig.output.publicPath + 'bundle.js');
-  }
+  res.sendFile(path.resolve(__dirname + '/.build/bundle.js'));
 });
 
-app.get('/', function (req, res) {
-  if (config.useBuildAssets) {
-    res.sendFile(path.resolve(__dirname + '/.build/index.html'));
-  } else {
-    request({
-      url: WebpackDevConfig.output.publicPath + 'index.html',
-      method: 'GET',
-      agent: new https.Agent({rejectUnauthorized: false})
-    }, function (error, response, body) {
-      res.header('Content-Type', 'text/html');
-      res.send(body);
-    })
-  }
-});
-
-if (config.env === 'local' && config.useBuildAssets === false) {
+if (config.env === 'local') {
   var webpackHost = {
     host: 'localhost',
     port: 9090
@@ -54,8 +37,6 @@ if (config.env === 'local' && config.useBuildAssets === false) {
   });
 }
 
-
-
 // ssl development server
 if (config.env == 'local') {
   var httpsServer = https.createServer({
@@ -70,3 +51,5 @@ if (config.env == 'local') {
     console.log('Listening on http://%s:%s [Express]', httpServer.address().address, httpServer.address().port);
   });
 }
+
+app.get('*', ssr);
