@@ -1,8 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Index from './components/index.jsx'
+import {Provider} from 'react-redux'
+import configureStore from './store/dev.js'
+import {Route, Router, IndexRoute, browserHistory} from 'react-router'
+import Routes from './routes.jsx'
+import {render} from 'react-dom';
+import Root from './root.jsx';
 
-ReactDOM.render(
-  <Index />,
-  document.getElementById('app')
-);
+const store = configureStore();
+
+render(<Root store={store}/>, document.getElementById('app'));
