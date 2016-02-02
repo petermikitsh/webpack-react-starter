@@ -15,14 +15,14 @@ export default class Html extends Component {
   render() {
 
     const {store, renderProps} = this.props;
-
-    const app = renderToString(
-      <div>
-        <Provider store={store}>
+    const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
+    const app = (config.env == "production") ? renderToString(
+      <Provider store={store}>
+        <div>
           <RouterContext {...renderProps} />
-        </Provider>
-      </div>
-    );
+        </div>
+      </Provider>
+    ) : '';
 
     return (
       <html>
@@ -31,6 +31,7 @@ export default class Html extends Component {
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/ >
         </head>
         <body>
+          <script dangerouslySetInnerHTML={{__html: initialState}}/>
           <div id='app' dangerouslySetInnerHTML={{__html: app}}></div>
           <script src={config.useBuildAssets ? '/bundle.js' : 'https://localhost:9090/build/bundle.js'}/>
         </body>

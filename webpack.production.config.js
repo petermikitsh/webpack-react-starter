@@ -17,5 +17,11 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "__DEVTOOLS__": false,
+      "process.env.NODE_ENV": JSON.stringify('production')
+    })
+  ]
 };

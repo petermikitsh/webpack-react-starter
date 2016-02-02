@@ -28,6 +28,10 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // HMR
-    new webpack.NoErrorsPlugin() // HMR
+    new webpack.NoErrorsPlugin(), // HMR
+    new webpack.DefinePlugin({
+      "__DEVTOOLS__": true,
+      "process.env.NODE_ENV": JSON.stringify('development')
+    })
   ]
 };
