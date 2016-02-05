@@ -3,23 +3,19 @@ var webpack = require('webpack'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  // debug es6 in the browser
-  devtool: 'source-map',
-  entry: [
-    'webpack-dev-server/client?https://localhost:9090', // HMR
-    'webpack/hot/only-dev-server', // HMR
-    './src/app.jsx'
-  ],
+  target: 'web',
+  entry: {
+    bundle: './src/app.jsx'
+  },
   output: {
     path: path.join(__dirname, './.build'),
-    filename: 'bundle.js',
-    publicPath: 'https://localhost:9090/build/'
+    filename: '[name].js'
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        loaders: ['babel'],
         exclude: /node_modules/
       },
       {
@@ -33,14 +29,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), // HMR
-    new webpack.NoErrorsPlugin(), // HMR
     new ExtractTextPlugin('bundle.css', {
       allChunks: true
     }),
     new webpack.DefinePlugin({
-      "__DEVTOOLS__": true,
-      "process.env.NODE_ENV": JSON.stringify('development')
+      "__DEVTOOLS__": false,
+      "process.env.NODE_ENV": JSON.stringify('production')
     })
   ]
 };

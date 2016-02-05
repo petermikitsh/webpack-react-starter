@@ -1,11 +1,11 @@
 import React from 'react'
 import Html from './html.jsx';
-import {renderToStaticMarkup} from 'react-dom-stream/server'
+import * as ReactDomServer from 'react-dom/server';
 import {match} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
 import makeReducer from '../src/reducers/index';
 import thunkMiddleware from 'redux-thunk';
-import routes from '../src/routes';
+import routes from '../src/routes.jsx';
 import {UPDATE_LOCATION} from 'redux-simple-router';
 import config from './config/config';
 
@@ -23,15 +23,14 @@ module.exports = function (req, res) {
       const location = renderProps ? renderProps.location : '/';
       store.dispatch({type: UPDATE_LOCATION, location});
       if (config.env === 'production') {
-        var htmlStream = renderToStaticMarkup(<Html store={store} renderProps={renderProps} />);
+        var html = ReactDomServer
+          .renderToStaticMarkup(<Html store={store} renderProps={renderProps} />)
+          .replace('<html>', '<!DOCTYPE html>');
+        res.end(html);
       } else {
         store.dispatch({type: UPDATE_LOCATION, location: '/'});
-        var htmlStream = renderToStaticMarkup(<Html store={store} />);
+        res.end(ReactDomServer.renderToStaticMarkup(<Html store={store} />));
       }
-      htmlStream.pipe(res, {end: false});
-      htmlStream.on('end', function () {
-        res.end();
-      });
     } else {
       res.status(404).send('Not found');
     }

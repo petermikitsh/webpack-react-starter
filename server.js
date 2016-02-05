@@ -11,10 +11,7 @@ var config = require('./server/config/config'),
 
 var app = express();
 app.use(compression());
-
-app.get('/bundle.js', function (req, res) {
-  res.sendFile(path.resolve(__dirname + '/.build/bundle.js'));
-});
+app.use(express.static('.build'));
 
 if (config.env === 'local') {
   var webpackHost = {
