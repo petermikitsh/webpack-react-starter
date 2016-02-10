@@ -1,19 +1,17 @@
 var webpack = require('webpack'),
-    path = require('path'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin");
+    path = require('path');
 
 module.exports = {
   // debug es6 in the browser
   devtool: 'source-map',
   entry: [
-    'webpack-dev-server/client?https://localhost:9090', // HMR
-    'webpack/hot/only-dev-server', // HMR
+    'webpack-hot-middleware/client', // HMR
     './src/app.jsx'
   ],
   output: {
     path: path.join(__dirname, './.build'),
     filename: 'bundle.js',
-    publicPath: 'https://localhost:9090/build/'
+    publicPath: 'https://localhost:8443/build/'
   },
   module: {
     loaders: [
@@ -24,20 +22,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // HMR
     new webpack.NoErrorsPlugin(), // HMR
-    new ExtractTextPlugin('bundle.css', {
-      allChunks: true
-    }),
     new webpack.DefinePlugin({
       "__DEVTOOLS__": true,
       "process.env.NODE_ENV": JSON.stringify('development')

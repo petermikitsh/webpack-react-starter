@@ -2,6 +2,7 @@
   "name": "webpack-react-starter",
   "version": "0.0.0",
   "description": "A boilerplate for developing realtime web applications.",
+  "license": "MIT",
   "engines": {
     "node": "5.5.0"
   },
@@ -10,7 +11,7 @@
     "build:backend": "webpack -p --config webpack.production.backend.js --progress --profile --colors",
     "build:frontend": "webpack -p --config webpack.production.frontend.js --progress --profile --colors",
     "build": "npm run build:backend && npm run build:frontend",
-    "dev": "node server.babel.js",
+    "dev": "node server/server.babel.js",
     "prod": "node .build/server.js"
   },
   "repository": {
@@ -21,6 +22,7 @@
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "babel-register": "^6.4.3",
+    "body-parser": "^1.14.2",
     "compression": "^1.6.1",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -35,7 +37,8 @@
     "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.1.7",
     "redux-simple-router": "^2.0.4",
-    "redux-thunk": "^1.0.3"
+    "redux-thunk": "^1.0.3",
+    "socketcluster": "^4.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
@@ -59,6 +62,7 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "1.12.11",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-hot-middleware": "^2.7.0"
   }
 }

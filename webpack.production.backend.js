@@ -14,7 +14,7 @@ fs.readdirSync('node_modules')
 
 module.exports = {
   entry: {
-    server: './server.babel.js'
+    server: './server/server.babel.js'
   },
   externals: nodeModules,
   module: {
