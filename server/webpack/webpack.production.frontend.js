@@ -8,7 +8,7 @@ module.exports = {
     bundle: './src/app.jsx'
   },
   output: {
-    path: path.join(__dirname, './.build'),
+    path: path.join(__dirname, '../../.build'),
     filename: '[name].js'
   },
   module: {
