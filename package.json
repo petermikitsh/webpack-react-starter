@@ -8,8 +8,8 @@
   },
   "scripts": {
     "clean": "rm -rf .build",
-    "build:backend": "webpack -p --config webpack.production.backend.js --progress --profile --colors",
-    "build:frontend": "webpack -p --config webpack.production.frontend.js --progress --profile --colors",
+    "build:backend": "webpack -p --config server/webpack/webpack.production.backend.js --progress --profile --colors",
+    "build:frontend": "webpack -p --config server/webpack/webpack.production.frontend.js --progress --profile --colors",
     "build": "npm run build:backend && npm run build:frontend",
     "dev": "node server/server.babel.js",
     "prod": "node .build/server.js"

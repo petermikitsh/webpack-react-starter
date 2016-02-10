@@ -6,7 +6,7 @@ import path from 'path'
 import fs from 'fs'
 import webpack from 'webpack'
 
-var WebpackDevConfig = require('../webpack.development.config'),
+var WebpackDevConfig = require('./webpack/webpack.development.config'),
     config = require('./config/config'),
     ssr = require('./ssr');
 
