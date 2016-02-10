@@ -1,14 +1,13 @@
 import bodyParser from 'body-parser'
 import compression from 'compression'
+import config from '../config'
 import express from 'express'
+import fs from 'fs'
 import https from 'https'
 import path from 'path'
-import fs from 'fs'
 import webpack from 'webpack'
-
-var WebpackDevConfig = require('./webpack/webpack.development.config'),
-    config = require('./config/config'),
-    ssr = require('./ssr');
+import ssr from '../ssr'
+import WebpackDevConfig from '../webpack/webpack.development.config'
 
 export function run (worker) {
 
@@ -31,10 +30,10 @@ export function run (worker) {
   } else {
     app.use(compression());
     app.use('/bundle.css', function (req, res) {
-      res.sendFile(path.join(__dirname, '../.build/bundle.css'));
+      res.sendFile(path.join(__dirname, '../../.build/bundle.css'));
     });
     app.use('/bundle.js', function (req, res) {
-      res.sendFile(path.join(__dirname, '../.build/bundle.js'));
+      res.sendFile(path.join(__dirname, '../../.build/bundle.js'));
     });
   }
   

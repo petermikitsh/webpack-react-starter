@@ -1,13 +1,13 @@
 import React from 'react'
-import Html from './html.jsx';
-import * as ReactDomServer from 'react-dom/server';
-import {match} from 'react-router';
-import {createStore, applyMiddleware} from 'redux';
-import makeReducer from '../src/reducers/index';
-import thunkMiddleware from 'redux-thunk';
-import routes from '../src/routes.jsx';
-import {UPDATE_LOCATION} from 'redux-simple-router';
-import config from './config/config';
+import Html from './html.jsx'
+import * as ReactDomServer from 'react-dom/server'
+import {match} from 'react-router'
+import {createStore, applyMiddleware} from 'redux'
+import makeReducer from '../src/reducers/index'
+import thunkMiddleware from 'redux-thunk'
+import routes from '../src/routes.jsx'
+import {UPDATE_LOCATION} from 'redux-simple-router'
+import config from './config'
 
 module.exports = function (req, res) {
 

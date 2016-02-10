@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import config from './config/config'
-import * as ReactDOMServer from 'react-dom/server';
-import {Provider} from 'react-redux';
-import {RouterContext} from 'react-router';
+import React, {Component, PropTypes} from 'react'
+import config from './config'
+import * as ReactDOMServer from 'react-dom/server'
+import {Provider} from 'react-redux'
+import {RouterContext} from 'react-router'
 
 export default class Html extends Component {
 
