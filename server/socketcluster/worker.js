@@ -11,6 +11,8 @@ import WebpackDevConfig from '../webpack/webpack.development.config'
 
 export function run (worker) {
 
+  console.log('   >> Worker PID:', process.pid);
+
   const app = express();
   const scServer = worker.scServer;
   const httpServer = worker.httpServer;
