@@ -10,6 +10,14 @@ Install Dependencies:
 npm install
 ```
 
+Start the server:
+
+```
+npm run dev
+```
+
+Navigate to [https://localhost:8443/](https://localhost:8443/) and accept the self-signed certificate.
+
 ## Scripts
 ```
 npm run build  // Build assets
