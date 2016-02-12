@@ -9,54 +9,28 @@ module.exports = {
     switch (env) {
       case 'local':
         return 3;
+      case 'production':
       default:
         return 1;
     }
   }(),
-  port: function () {
-    switch (env) {
-      case 'local':
-        return 8443;
-      default:
-        return process.env.APP_PORT;
-    }
-  }(),
+  port: process.env.APP_PORT || 8443,
   rebootWorkerOnCrash: env != 'local',
-  redis: function () {
-    switch (env) {
-      case 'local':
-        return {
-          host: 'localhost',
-          port: 6379,
-          password: 'myRedisPassword'
-        }
-      default:
-        return {
-          host: process.env.REDIS_HOST,
-          port: process.env.REDIS_PORT,
-          password: process.env.REDIS_PASSWORD
-        }
-    }
-  }(),
-  ssl: function () {
-    switch (env) {
-      case 'local':
-        return {
-          key: path.join(__dirname, '.ssl/key.pem'),
-          cert: path.join(__dirname, '.ssl/cert.pem')
-        }
-      default:
-        return {
-          key: process.env.SSL_KEY_PATH,
-          cert: process.env.SSL_CERT_PATH
-        }
-    }
-  }(),
-  useBuildAssets: (env == 'production'),
+  redis: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: process.env.REDIS_PORT || 6379,
+    password: process.env.REDIS_PASSWORD || 'myRedisPassword'
+  },
+  ssl: {
+    key: process.env.SSL_KEY_PATH || path.join(__dirname, '.ssl/key.pem'),
+    cert: process.env.SSL_CERT_PATH || path.join(__dirname, '.ssl/cert.pem')
+  },
+  useBuildAssets: (env === 'production'),
   workers: function () {
     switch (env) {
       case 'local':
         return 1;
+      case 'production':
       default:
         return os.cpus().length;
     }
