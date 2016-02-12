@@ -6,6 +6,13 @@
   "engines": {
     "node": "5.5.0"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
   "scripts": {
     "clean": "rm -rf .build",
     "build:backend": "webpack -p --config server/webpack/webpack.production.backend.js --progress --profile --colors",
