@@ -21,6 +21,15 @@ module.exports = {
     port: process.env.REDIS_PORT || 6379,
     password: process.env.REDIS_PASSWORD || 'myRedisPassword'
   },
+  rethinkdb: {
+    host: process.env.RETHINK_HOST || 'localhost',
+    port: process.env.RETHINK_PORT || 28015,
+    db: process.env.RETHINK_DB || 'webpackreactstarter',
+    authKey: process.env.RETHINK_AUTHKEY || null,
+    ssl: process.env.RETHINK_CERT_PATH ? {
+      ca: process.env.RETHINK_CERT_PATH
+    } : null
+  },
   ssl: {
     key: process.env.SSL_KEY_PATH || path.join(__dirname, '.ssl/key.pem'),
     cert: process.env.SSL_CERT_PATH || path.join(__dirname, '.ssl/cert.pem')

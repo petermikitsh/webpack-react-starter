@@ -8,6 +8,7 @@ import path from 'path'
 import webpack from 'webpack'
 import ssr from '../ssr'
 import WebpackDevConfig from '../webpack/webpack.development.config'
+import '../rethinkdb/init'
 
 export function run (worker) {
 
