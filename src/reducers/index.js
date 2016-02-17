@@ -1,9 +1,13 @@
 import {combineReducers} from 'redux';
-import {routeReducer as routing} from 'redux-simple-router';
+import {routeReducer} from 'redux-simple-router';
 import {compose} from 'redux';
+import {socketClusterReducer} from 'redux-socket-cluster';
+import home from './home';
 
 let currentReducers = {
-  routing
+  home,
+  routing: routeReducer,
+  socket: socketClusterReducer
 };
 
 export default (newReducers, reducerEnhancers) => {

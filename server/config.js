@@ -5,6 +5,7 @@ var env = process.env.NODE_ENV || 'local';
 
 module.exports = {
   env: env,
+  authKey: 'myJwtPassword' || process.env.JWT_AUTHKEY,
   logLevel: function () {
     switch (env) {
       case 'local':

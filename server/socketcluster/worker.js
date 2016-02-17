@@ -10,6 +10,8 @@ import ssr from '../ssr'
 import WebpackDevConfig from '../webpack/webpack.development.config'
 import '../rethinkdb/init'
 
+var jwt = require('jsonwebtoken');
+
 export function run (worker) {
 
   console.log('   >> Worker PID:', process.pid);
@@ -39,7 +41,28 @@ export function run (worker) {
       res.sendFile(path.join(__dirname, '../../.build/bundle.js'));
     });
   }
-  
+
+  app.get('/api/token', function (req, res) {
+    res.send(jwt.sign({}, config.authKey));
+  });
+
   app.get('*', ssr);
+
+  scServer.on('connection', function (socket) {
+
+    console.log('Client connected:', socket.id);
+
+    var interval = setInterval(function () {
+      socket.emit('rand', {
+        rand: Math.random() * 5
+      });
+    }, 1000);
+
+    socket.on('disconnect', function () {
+      console.log('Client disconnected:', socket.id);
+      clearInterval(interval);
+    });
+
+  });
 
 }

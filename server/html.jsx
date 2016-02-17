@@ -6,11 +6,6 @@ import {RouterContext} from 'react-router'
 
 export default class Html extends Component {
 
-  static propTypes: {
-    store: PropTypes.object.isRequired,
-    renderProps: PropTypes.object
-  };
-
   render() {
     const {store, renderProps} = this.props;
     const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())}`;
@@ -41,4 +36,9 @@ export default class Html extends Component {
     );
   }
 
+}
+
+Html.propTypes = {
+  store: PropTypes.object.isRequired,
+  renderProps: PropTypes.object  
 }

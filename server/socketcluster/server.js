@@ -10,6 +10,7 @@ export default function () {
 
   new SocketCluster({
     appName: 'myapp',
+    authKey: config.authKey,
     port: config.port,
     protocol: 'https',
     protocolOptions: {

@@ -38,7 +38,5 @@ if (config.env == 'local') {
   process.on('uncaughtException', onClose);
 
 } else {
-  startServer();
+  start();
 }
-
-

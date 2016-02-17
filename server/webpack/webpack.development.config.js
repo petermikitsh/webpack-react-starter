@@ -5,6 +5,7 @@ module.exports = {
   // debug es6 in the browser
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client', // HMR
     './src/app.jsx'
   ],

@@ -6,7 +6,7 @@ class Foo extends Component {
     return (
       <div>
         <h1>Hello World! Foo</h1>
-        <Link to='/'>Back to Index</Link>
+        <Link to='/'>Back to Home</Link>
       </div>
     );
   }
