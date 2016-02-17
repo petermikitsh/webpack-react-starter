@@ -30,7 +30,7 @@ export default class Html extends Component {
         <body>
           <script dangerouslySetInnerHTML={{__html: initialState}}/>
           <div id='app' dangerouslySetInnerHTML={{__html: app}}></div>
-          <script src={config.useBuildAssets ? '/bundle.js' : 'https://localhost:8443/build/bundle.js'}/>
+          <script src={config.useBuildAssets ? '/bundle.js' : 'https://localhost:8443/build/bundle.js'} async/>
         </body>
       </html>
     );
